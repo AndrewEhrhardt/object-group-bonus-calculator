@@ -75,21 +75,46 @@ function accessEmployeeData(employeeList){
     // push new object into employeeBonusArray
     employeeBonusArray.push(bonusCalculator(employee));
   }
+  return employeeBonusArray;
 }
 
 function bonusCalculator(employeeObj){
   console.log('in bonus');
-  let bonus = 0;
-  let bonusPercentage = 0;
+  // let empBonus = 0;
+  let empBonusPercentage = 0;
   let employeeBonusStatement = {
     name: employeeObj.name,
     totalCompensation: parseInt(employeeObj.annualSalary) + bonus,
     // do we need an if statement to contain total bonuses?
-    bonusPercentage: bonusPercentage, // add calculation here
+    
+    bonusPercentage: 0, // add calculation here
     // will a switch statement work here? 
-    totalBonus: bonus, // add calculation here
+    totalBonus: 0, // add calculation here
   };
+  // if (employeeObj.reviewRating  2){
+  //   return employeeBonusStatement;
+  // } 
+  switch(employeeObj.reviewRating) {
+    case 1:
+    case 2:
+      console.log('no change');// some code
+      return employeeBonusStatement;
+      break;
+    case 3:
+      employeeObj.bonusPercentage = .04; //some code
+      break;
+    case 4:
+      employeeObj.bonusPercentage = .06; //some code
+      break;
+    case 5:
+      employeeObj.bonusPercentage = .1; //some code
+      break;
+    default:
+      console.log('default');
+  }
   if ()
+  
+  return employeeBonusStatement;
 }
 
 console.log(accessEmployeeData(employees));
