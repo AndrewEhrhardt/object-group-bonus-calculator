@@ -80,20 +80,17 @@ function accessEmployeeData(employeeList){
 
 function bonusCalculator(employeeObj){
   console.log('in bonus');
-  // let empBonus = 0;
+  let empBonus = 0;
+  let empSalary = parseInt(employeeObj.annualSalary);
   let empBonusPercentage = 0;
   let employeeBonusStatement = {
     name: employeeObj.name,
-    totalCompensation: parseInt(employeeObj.annualSalary) + bonus,
-    // do we need an if statement to contain total bonuses?
-    
-    bonusPercentage: 0, // add calculation here
+    totalCompensation: empSalary, // + empBonus,
+    bonusPercentage: empBonusPercentage, 
     // will a switch statement work here? 
-    totalBonus: 0, // add calculation here
+    totalBonus: empBonus 
   };
-  // if (employeeObj.reviewRating  2){
-  //   return employeeBonusStatement;
-  // } 
+
   switch(employeeObj.reviewRating) {
     case 1:
     case 2:
@@ -101,19 +98,28 @@ function bonusCalculator(employeeObj){
       return employeeBonusStatement;
       break;
     case 3:
-      employeeObj.bonusPercentage = .04; //some code
+      employeeBonusStatement.bonusPercentage = 4; //some code
       break;
     case 4:
-      employeeObj.bonusPercentage = .06; //some code
+      employeeBonusStatement.bonusPercentage = 6; //some code
       break;
     case 5:
-      employeeObj.bonusPercentage = .1; //some code
+      employeeBonusStatement.bonusPercentage = 10; //some code
       break;
     default:
       console.log('default');
   }
-  if ()
-  
+  if (employeeObj.employeeNumber.length === 4){
+    employeeBonusStatement.bonusPercentage += 5;
+  }
+  if (empSalary > 65000){
+    employeeBonusStatement.bonusPercentage -= 1;
+  }
+  if (employeeBonusStatement.bonusPercentage > 13){
+    employeeBonusStatement.bonusPercentage = 13;
+  }
+  employeeBonusStatement.totalCompensation = parseInt((employeeBonusStatement.bonusPercentage/100 + 1) * empSalary);
+  employeeBonusStatement.totalBonus = employeeBonusStatement.totalCompensation - employeeObj.annualSalary;
   return employeeBonusStatement;
 }
 
