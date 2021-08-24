@@ -67,7 +67,6 @@ No bonus can be above 13% or below 0% total.
 //
 
 function accessEmployeeData(employeeList){
-  console.log('in accessEmployeeData');
   let employeeBonusArray = []; // empy array to store new objects
   for (let employee of employeeList){
     console.table(employee);
@@ -79,32 +78,28 @@ function accessEmployeeData(employeeList){
 }
 
 function bonusCalculator(employeeObj){
-  console.log('in bonus');
-  let empBonus = 0;
-  let empSalary = parseInt(employeeObj.annualSalary);
-  let empBonusPercentage = 0;
+  employeeObj.annualSalary = parseInt(employeeObj.annualSalary)
   let employeeBonusStatement = {
     name: employeeObj.name,
-    totalCompensation: empSalary, // + empBonus,
-    bonusPercentage: empBonusPercentage, 
-    // will a switch statement work here? 
-    totalBonus: empBonus 
+    totalCompensation: employeeObj.annualSalary, 
+    bonusPercentage: 0, 
+    totalBonus: 0 
   };
 
   switch(employeeObj.reviewRating) {
     case 1:
     case 2:
-      console.log('no change');// some code
+      console.log('no change');
       return employeeBonusStatement;
       break;
     case 3:
-      employeeBonusStatement.bonusPercentage = 4; //some code
+      employeeBonusStatement.bonusPercentage = 4; 
       break;
     case 4:
-      employeeBonusStatement.bonusPercentage = 6; //some code
+      employeeBonusStatement.bonusPercentage = 6;
       break;
     case 5:
-      employeeBonusStatement.bonusPercentage = 10; //some code
+      employeeBonusStatement.bonusPercentage = 10;
       break;
     default:
       console.log('default');
@@ -112,13 +107,13 @@ function bonusCalculator(employeeObj){
   if (employeeObj.employeeNumber.length === 4){
     employeeBonusStatement.bonusPercentage += 5;
   }
-  if (empSalary > 65000){
+  if (parseInt(employeeObj.annualSalary) > 65000){
     employeeBonusStatement.bonusPercentage -= 1;
   }
   if (employeeBonusStatement.bonusPercentage > 13){
     employeeBonusStatement.bonusPercentage = 13;
   }
-  employeeBonusStatement.totalCompensation = parseInt((employeeBonusStatement.bonusPercentage/100 + 1) * empSalary);
+  employeeBonusStatement.totalCompensation = parseInt((employeeBonusStatement.bonusPercentage/100 + 1) * employeeObj.annualSalary);
   employeeBonusStatement.totalBonus = employeeBonusStatement.totalCompensation - employeeObj.annualSalary;
   return employeeBonusStatement;
 }
